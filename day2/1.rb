@@ -2,7 +2,6 @@
 class Operator  
   def method_missing(m) 
     number = m.to_s[m.size-10,m.size]
-    puts number
     if number.size==10  && number.to_i.to_s.size == number.size
       puts "Calling "+number
     else

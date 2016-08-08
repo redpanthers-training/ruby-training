@@ -1,4 +1,4 @@
-## Questions
+## Day 1
 
 * Find all prime numbers bellow 1,000,000,000
 * Accept a number (less than a billion) via command line and print if its prime or no

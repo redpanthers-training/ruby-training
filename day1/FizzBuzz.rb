@@ -11,7 +11,7 @@ class Fixnum
 	end
 end
 
-(1..30).each do |num|
+(1..100).each do |num|
 	if(num.mult_three && num.mult_five)
 	then
 		puts num.to_s+" FIzzBuzz";

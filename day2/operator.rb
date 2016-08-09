@@ -2,7 +2,7 @@ class Operator
   def method_missing(name,*args,&block)
     length=name.length
     status=true
-    status=false if length<15 
+    status=false if length!=15 
     i=1
     while(i<=10 && status!=false)
       n=name[length-i]
@@ -20,4 +20,4 @@ class Operator
     end
   end
 end
-Operator.new.call_9995557770
+Operator.new.call_p123456789

@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 class Operator  
   def method_missing(m) 
-    number = m.to_s[m.size-10,m.size]
+    number = m.to_s.split('_').last
+    #number = m.to_s[m.size-10,m.size]
     if number.size==10  && number.to_i.to_s.size == number.size
       puts "Calling "+number
     else
@@ -10,5 +11,5 @@ class Operator
   end  
 end
 
-Operator.new.call_1234567890
+Operator.new.call_12345678s90
 

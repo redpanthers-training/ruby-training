@@ -1,0 +1,1 @@
+Create an operator class, that can accepts the method Operator.new.call_9995557770, it should confirm the last 10 digit is an integer. If it is an integer print "calling <number>", else appropriate message should be show if its not an integer.

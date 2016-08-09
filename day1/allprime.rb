@@ -10,9 +10,9 @@ class Fixnum
     end
     status=true if x==2;
     if status==true
-     x
+      x
     else
-			x=false;
+      x=false;
     end
   end
 end

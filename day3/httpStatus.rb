@@ -7,10 +7,10 @@ file = File.open("test.csv", "r").read.split.map {|x| x.split(",")}
 def process_request(index,ur)
   url1 = "https://www.".concat(ur)
   url2 = "http://www.".concat(ur)
-  code1 =  request(url1)
-  code2 = request(url2)
-  @result.write("#{index},#{ur},#{code1},#{code2}\n")
-  puts Thread.list.count
+  code_https =  request(url1)
+  code_http = request(url2)
+  @result.write("#{index},#{ur},#{code_https},#{code_http}\n")
+  puts ur
 end
 
 def request(ur)
@@ -27,12 +27,15 @@ def for_https(http)
 end
 
 que = Queue.new
+file.each{|f| que << f}
 
 threads = []
 6.times do
   threads << Thread.new do
-
-    { process_request element[0], (element[1]) })
+    while(e = que.pop(true) rescue nil)
+        process_request e[0],e[1]
+    end
+  end
 end
 
 threads.each{|t| t.join}

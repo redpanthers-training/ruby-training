@@ -1,29 +1,28 @@
 require 'net/http'
 require 'net/https'
 require 'uri'
-file = File.open("test.csv", "r").read.split.map {|x| x.split(",")}
-@result = File.new("result.csv", "w")
+file = File.open("top-1m.csv", "r").read.split.map {|x| x.split(",")}
 
 def process_request(index,ur)
   url1 = "https://www.".concat(ur)
   url2 = "http://www.".concat(ur)
   code_https =  request(url1)
   code_http = request(url2)
-  @result.write("#{index},#{ur},#{code_https},#{code_http}\n")
-  puts ur
+  result = File.open("result.csv", "a")
+  result << "#{index},#{ur},#{code_https},#{code_http}\n"
+  result.close
 end
 
 def request(ur)
   url = URI.parse(ur)
-  http = Net::HTTP.new(url.host,url.port)
-  for_https(http) if url.scheme == "https"
-  response = http.request(Net::HTTP::Get.new(url.request_uri))
-  return response.code.to_s
-end
-
-def for_https(http)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  begin
+    http = Net::HTTP.new(url.host,url.port)
+    http.use_ssl = true if url.scheme == "https"
+    response = http.request(Net::HTTP::Get.new(url.request_uri))
+    response.code.to_s
+  rescue
+    "ERROR"
+  end
 end
 
 que = Queue.new
@@ -32,8 +31,8 @@ file.each{|f| que << f}
 threads = []
 6.times do
   threads << Thread.new do
-    while(e = que.pop(true) rescue nil)
-        process_request e[0],e[1]
+    while((e = que.pop(true)) rescue nil)
+      process_request e[0],e[1]
     end
   end
 end

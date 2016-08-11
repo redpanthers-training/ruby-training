@@ -5,7 +5,7 @@ get '/frank-says' do
 end
 
 get '/' do
-  @vis = 0 
-  @vis = @vis+1
-  'You visited #{ @vis }'
+  vis = 0 
+  vis = vis+1
+  'You visited #{vis}'
 end

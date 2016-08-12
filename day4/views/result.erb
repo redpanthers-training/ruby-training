@@ -1,18 +1,1 @@
-<html>
-  <head>
-    <title>
-      Heading Contents
-    </title>
-  </head>
-  <body>
-    <B>Domain Name   :   <%= @domain_name %></B>
-    <h4>Heading Contents</H4>
-    <% @head.each do |h| %>
-      <br><%= h.text %>
-    <% end %>
-    <h4>Links</h4>
-    <% @links.each do |link| %>
-      <br><%= link["href"] %>
-    <% end %>
-  </body>
-</html>
+<html>  <head>    <title>      Json Format Scrapped Data    </title>  </head>  <body>    <B>Domain Name   :   <%= @domain_name %></B>        <%= JSON.pretty_generate @data %>  </body></html>

@@ -9,15 +9,11 @@ end
 
 post "/display" do
   @domain    = params[:domain] 
-  @head      = []
-  @link      = []
   json_data = {}
   begin
     @domain  = "https://"+@domain
     uri      = URI.parse(@domain)
     page     = Nokogiri::HTML(open(uri))
-    @head    = page.css("h1,h2,h3,h4,h5,h6")
-    @link    = page.css("a")
     json_data["h1"]=page.css("h1").map {|h| h.text}
     json_data["h2"]=page.css("h2").map {|h| h.text}
     json_data["h3"]=page.css("h3").map {|h| h.text}

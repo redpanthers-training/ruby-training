@@ -20,6 +20,10 @@
         <% end %>
       </p>
     <% end %>
-    <p><%= @source %></p>
+    <p>
+      <% @data.split("\n").each do |data| %>
+        <br><%= data %>
+      <% end %>
+    </p>
   </body>
 </html>

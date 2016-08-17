@@ -4,10 +4,8 @@ require 'uri'
 file = File.open("top-1m.csv", "r").read.split.map {|x| x.split(",")}
 
 def process_request(index,ur)
-  url1 = "https://www.".concat(ur)
-  url2 = "http://www.".concat(ur)
-  code_https =  request(url1)
-  code_http = request(url2)
+  code_https =  request("https://www.".concat(ur))
+  code_http = request("http://www.".concat(ur))
   result = File.open("result.csv", "a")
   result << "#{index},#{ur},#{code_https},#{code_http}\n"
   result.close

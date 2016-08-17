@@ -3,28 +3,29 @@ require 'open-uri'
 require 'nokogiri'
 require 'json'
 
+def create_json(page, tags)
+  json_data = {}
+  tags.each do |tag|
+    if tag == "a"
+      json_data["links"] = page.css(tag).map { |t| t["href"] }
+    else
+      json_data[tag] = page.css(tag).map { |t| t.text }
+    end
+  end
+  json_data
+end
+
 get "/" do
   erb :index
 end
 
-post "/display" do
-  @domain    = params[:domain] 
-  json_data = {}
+post "/display" do 
   begin
-    @domain  = "https://"+@domain
-    uri      = URI.parse(@domain)
-    page     = Nokogiri::HTML(open(uri))
-    json_data["h1"]=page.css("h1").map {|h| h.text}
-    json_data["h2"]=page.css("h2").map {|h| h.text}
-    json_data["h3"]=page.css("h3").map {|h| h.text}
-    json_data["h4"]=page.css("h4").map {|h| h.text}
-    json_data["h5"]=page.css("h5").map {|h| h.text}
-    json_data["h6"]=page.css("h6").map {|h| h.text}
-    json_data["links"]=page.css("a").map{|ln| ln["href"]}
+    tags      = ["h1","h2","h3","h4","h5","h6","a"]
+    page      = Nokogiri::HTML(open("http://"+params[:domain]))
     content_type :json
-    JSON.pretty_generate json_data
+    JSON.pretty_generate (create_json page, tags)
   rescue Exception => e
-    @source  = "Error: Unable to Connect to the Domain"
+    source  = "Error: Unable to Connect to the Domain\n #{e}"
   end
 end
-

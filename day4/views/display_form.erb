@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Domain-Info</title>
+  </head>
+  <body>
+    <% if @head.any? %>
+      <h1>HEADINGS</h1>
+      <p id="head">
+        <% @head.each do |hd| %>
+          <br><strong><%= hd.text %></strong>
+        <% end %>
+      </p>
+    <% end %>
+    <% if @link.any? %>
+      <h1>LINKS</h1>
+      <p id="link">
+        <% @link.each do |ln|%>
+          <br><%= ln["href"] %> ===> 
+          <strong><%= ln %></strong>  
+        <% end %>
+      </p>
+    <% end %>
+    <p>
+      <% @data.split("\n").each do |data| %>
+        <br><%= data %>
+      <% end %>
+    </p>
+  </body>
+</html>

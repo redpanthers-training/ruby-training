@@ -2,7 +2,7 @@
 
 	class Prime
 
-		MAX = 100
+		MAX = 1000000000
 
 		def prime_numbers 
 			print "Prime numbers between 0 and #{MAX} are...\n"

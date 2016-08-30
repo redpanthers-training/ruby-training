@@ -2,7 +2,7 @@
 
   #Method for checking condition wheater it is less than billion or not 
   def check_cond(num)
-  	if num < 10
+  	if num < 1000000
 			true
 		else
 			puts "Number not less than billion. Try again..."
@@ -43,7 +43,4 @@
 	end
 
 	check_prime_num(num)
-	
-
-
 	

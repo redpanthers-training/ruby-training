@@ -2,7 +2,7 @@
 
 	class Fizbuzz
 
-		NUM = 15
+		NUM = 100
 
 		def print_num
 			for i in (0..NUM)  do 
